@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mwhc-test
+  namespace: playground-dev
+  annotations:
+    description: |
+      This is just for testing my mutating webhook service.
+  labels:
+    svc: mwhc-test
+    swagger: disabled
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      svc: mwhc-test
+  template:
+    metadata:
+      labels:
+        svc: mwhc-test
+    spec:
+      securityContext:
+        runAsNonRoot: false
+      containers:
+      - name: mwhc-test
+        image: nginx
+        ports:
+        - containerPort: 80
+          name: mwhc-test-http
+        env:
+        - name: TZ
+          value: "UTC"          

@@ -1,0 +1,70 @@
+{
+
+		"monitorNamespaces": [
+			"playground-",
+			"hello-world-",
+			"tools-",
+			"corpsys-jde-",
+			"productcatalog-",
+			"itossint-",
+			"bw-",
+			"mirror-",
+			"upsell-",
+			"winom-",
+			"product-",
+			"webconfig-",
+			"pao-",
+			"pao-util-",
+			"wincrm-"
+		],
+		"exemptIngresses": [
+		    "playground-dev\/test-exempt-ing",
+			"tools-prod\/healthz-prod",
+			"tools-prod\/healthz-vml466",
+			"tools-prod\/healthz-vml467",
+			"tools-prod\/healthz-vml468"
+		],
+		"exemptDeployments": [
+			"playground-dev\/test-exempt-deploy"
+		],
+		"exemptServices": [
+			"playground-dev\/test-exempt-service"
+		],
+		"validHosts": [
+			"ms-prod.windstream.com",
+			"ms-prod2.windstream.com",
+			"inetsvcs.windstream.com",
+			"vlm466.servers.windstream.com",
+			"vlm467.servers.windstream.com",
+			"vml468.servers.windstream.com"
+		],
+		"nginxMasterIngressAllow": {
+			"nginx.org\/mergeable-ingress-type": "^master$",
+			"custom.nginx.org\/oidc-resolver-address": "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+			"custom.nginx.org\/oidc-jwt-keyfile": "^http",
+			"custom.nginx.org\/oidc-logout-redirect": "^http",
+			"custom.nginx.org\/oidc-authz-endpoint": "^http",
+			"custom.nginx.org\/oidc-token-endpoint": "^http",
+			"custom.nginx.org\/oidc-client": ".+",
+			"custom.nginx.org\/oidc-client-secret": ".+",
+			"custom.nginx.org\/oidc-hmac-key": ".+"
+		},
+		"nginxMinionIngressAllow": {
+			"nginx.org\/mergeable-ingress-type": "^minion$",
+			"custom.nginx.org\/oidc-client": ".+",
+			"custom.nginx.org\/oidc-client-secret": ".+",
+			"custom.nginx.org/enable-oidc": "^False$|^True$",
+			"nginx.org\/proxy-connect-timeout": "^[0-9]*[sm]$",
+			"nginx.org\/proxy-read-timeout": "^[0-9]*[sm]$",
+			"nginx.org\/proxy-send-timeout": "^[0-9]*[sm]$",
+			"nginx.org\/rewrites": "^(?!\\s*$).+",
+			"nginx.org\/ssl-services": ".+"
+		},
+		"ingressMinionRequiredAnnotations": {
+			"description": ".+",
+			"nginx.org\/ssl-services": ".+"
+		},
+		"ingressMinionRequiredLabels": {
+			"swagger": "^enabled$|^disabled$|^ui$|^enabled-ui$"
+		}
+}

@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: admit
+  namespace: tools-dev
+  annotations:
+    description: |
+      This is a mutating webhook service.  Its purpose is to enforce Windstream guidelines and standards.
+      It reviews pods, deployments, services, and ingress resource definitions and enforces various standards
+      to help prevent issues as well as properly document resources in the k8s clusters.
+  labels:
+    svc: admit
+    swagger: disabled
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      svc: admit
+  template:
+    metadata:
+      labels:
+        svc: admit
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1234
+      containers:
+      - name: admit
+        image: krenaut1/admit:v0.4.0
+#        command: ['sh', '-c', 'sleep 600']
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8443
+          name: admit-port
+        env:
+        - name: TZ
+          value: "UTC"
+        - name: PROFILE
+          value: "dev"
+        volumeMounts:
+        - name: cert
+          mountPath: /run/secrets/tls
+        - name: config
+          mountPath: /app/config
+      volumes:
+      - name: cert
+        secret:
+          optional: false
+          secretName: admit.tools-dev
+          defaultMode: 292 # 292 is 0444 unix style permissions.
+      - name: config
+        configMap:
+          name: tools-dev-admit-config
+          optional: false
+          defaultMode: 292
+          

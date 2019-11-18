@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: badsvc
+  namespace: tools-dev
+  labels:
+    svc: badsvc
+  annotations:
+    description: |
+      This is just a test
+spec:
+  selector:
+    svc: badsvc
+  ports:
+    - port: 443
+      targetPort: 8443

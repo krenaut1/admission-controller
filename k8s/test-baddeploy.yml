@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testsvc
+  namespace: tools-dev
+  annotations:
+  labels:
+    svc: testsvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      svc: testsvc
+  template:
+    metadata:
+      labels:
+        svc: testsvc
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 0
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80

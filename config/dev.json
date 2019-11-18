@@ -1,0 +1,77 @@
+{
+
+		"monitorNamespaces": [
+			"playground-",
+			"tools-",
+			"corpsys-jde-",
+			"productcatalog-",
+			"itossint-",
+			"bw-",
+			"mirror-",
+			"upsell-",
+			"winom-",
+			"product-",
+			"webconfig-",
+			"pao-",
+			"pao-util-",
+			"wincrm-"
+		],
+		"exemptIngresses": [
+		    "playground-dev\/test-exempt-ing",
+			"tools-dev\/healthz-dev",
+			"tools-dev\/healthz-test",
+			"tools-dev\/healthz-uat",
+			"tools-dev\/healthz-vml316",
+			"tools-dev\/healthz-vml480",
+			"tools-dev\/healthz-vml481"
+		],
+		"exemptDeployments": [
+			"playground-dev\/test-exempt-deploy",
+			"tools-dev\/healthz"
+		],
+		"exemptServices": [
+			"playground-dev\/test-exempt-service",
+			"tools-dev\/healthz"
+		],
+		"validHosts": [
+			"ms-dev.windstream.com",
+			"ms-test.windstream.com",
+			"ms-uat.windstream.com",
+			"inetsvcs-dev.windstream.com",
+			"inetsvcs-test.windstream.com",
+			"inetsvcs-uat.windstream.com",
+			"vlm480.servers.windstream.com",
+			"vlm481.servers.windstream.com",
+			"vml316.servers.windstream.com"
+		],
+		"nginxMasterIngressAllow": {
+			"nginx.org\/mergeable-ingress-type": "^master$",
+			"custom.nginx.org\/oidc-resolver-address": "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$",
+			"custom.nginx.org\/oidc-jwt-keyfile": "^http",
+			"custom.nginx.org\/oidc-logout-redirect": "^http",
+			"custom.nginx.org\/oidc-authz-endpoint": "^http",
+			"custom.nginx.org\/oidc-token-endpoint": "^http",
+			"custom.nginx.org\/oidc-client": ".+",
+			"custom.nginx.org\/oidc-client-secret": ".+",
+			"custom.nginx.org\/oidc-hmac-key": ".+"
+		},
+		"nginxMinionIngressAllow": {
+			"nginx.org\/mergeable-ingress-type": "^minion$",
+			"custom.nginx.org\/oidc-client": ".+",
+			"custom.nginx.org\/oidc-client-secret": ".+",
+			"custom.nginx.org/enable-oidc": "^False$|^True$",
+			"nginx.org\/proxy-connect-timeout": "^[0-9]*[sm]$",
+			"nginx.org\/proxy-read-timeout": "^[0-9]*[sm]$",
+			"nginx.org\/proxy-send-timeout": "^[0-9]*[sm]$",
+			"nginx.org\/rewrites": ".+",
+			"nginx.org\/ssl-services": ".+"
+		},
+		"ingressMinionRequiredAnnotations": {
+			"description": ".+",
+			"nginx.org\/ssl-services": ".+"
+
+	},
+		"ingressMinionRequiredLabels": {
+			"swagger": "^enabled$|^disabled$|^ui$|^enabled-ui$"
+		}
+}
